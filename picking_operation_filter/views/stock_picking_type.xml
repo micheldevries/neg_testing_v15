@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_picking_type_operation_filter_view" model="ir.ui.view">
+        <field name="name">picking.type.operation.kanban.batch.filter</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_pickingtype_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <filter
+                    string="Active Operation"
+                    name="active_operation"
+                    domain="[('active_operation','=',True)]"
+                />
+            </xpath>
+            <xpath expr="//group/filter[@name='groupby_code']" position="after">
+                <filter
+                    string="Active Operation"
+                    name="groupby_active_op"
+                    domain="[]"
+                    context="{'group_by': 'active_operation'}"
+                />
+
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_picking_type_kanban_inh" model="ir.ui.view">
+        <field name="name">stock.picking.type.kanban.inh</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban" />
+        <field name="arch" type="xml">
+            <field name="count_picking_backorders" position="after">
+                <field name="update_dummy" />
+                <field name="active_operation" />
+            </field>
+        </field>
+    </record>
+
+    <record id="stock.stock_picking_type_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_active_operation': 1}</field>
+
+    </record>
+
+
+</odoo>

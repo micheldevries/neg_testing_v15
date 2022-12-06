@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="inherit_view_sale_order_form_NEG" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='order_lines']/field/tree/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute name="options">{'no_quick_create': True}</attribute>
+            </xpath>
+            <xpath
+                expr="//page[@name='order_lines']/field/form/group/group/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute name="options">{'no_quick_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="remove_create_edit_invoice_view_NEG" model="ir.ui.view">
+        <field name="name">remove.create.edit.invoice.view.pfm</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute name="options">{'no_create_edit': True, 'no_quick_create': True}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="remove_create_edit_purchase_order_view_NEG" model="ir.ui.view">
+        <field name="name">remove.create.edit.purchase.order.view.neg</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute name="options">{'no_quick_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_form_NEG" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.neg</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute name="options">{'no_quick_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

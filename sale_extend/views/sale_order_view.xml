@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="inherit_view_sale_order_form_extend" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='other_information']/group[2]/group[@name='sale_shipping']"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <separator class="remove_css_001" string="Delivery" />
+                <field
+                    name="warehouse_id"
+                    options="{'no_create': True}"
+                    groups="stock.group_stock_multi_warehouses"
+                    force_save="1"
+                />
+                <field
+                    name="incoterm"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="sale_stock.group_display_incoterm"
+                />
+                <field name="picking_policy" required="True" />
+                <label for="commitment_date" string="Delivery Date" />
+                <div class="o_row">
+                    <field name="commitment_date" />
+                    <span
+                        class="text-muted"
+                        attrs="{'invisible': [('effective_date', '!=', False), ('commitment_date', '!=', False)]}"
+                    >
+                        Expected:
+                        <field name="expected_date" widget="date" />
+                    </span>
+                </div>
+                <field
+                    name="effective_date"
+                    attrs="{'invisible': [('effective_date', '=', False)]}"
+                />
+                <script class="remove_css_001">
+                    $('.remove_css_001').parent().css("width", "auto");
+                    $('.remove_css_002').parent().css("width", "auto");
+                </script>
+            </xpath>
+        </field>
+    </record>
+</odoo>

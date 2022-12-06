@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_quantity']" position="after">
+            <th
+                name="th_due_date"
+                style="min-width: 6.5em !important; text-align: center;"
+            >Lead Time</th>
+        </xpath>
+        <xpath expr="//td[@name='td_quantity']" position="after">
+            <td style="text-align: center;" name="td_due_date"><span
+                    t-field="line.customer_lead"
+                    t-options='{"widget": "float", "precision": 0}'
+                /></td>
+        </xpath>
+    </template>
+</odoo>

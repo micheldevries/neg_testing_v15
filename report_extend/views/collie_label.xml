@@ -1,0 +1,84 @@
+<odoo>
+    <record id="neg_print_collie_label_action" model="ir.actions.report">
+        <field name="name">Print Collie Label</field>
+        <field name="model">collie.label.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">report_extend.print_collie_label</field>
+        <field name="report_file">report_extend.print_collie_label</field>
+        <field
+            name="print_report_name"
+        >'Collie Label - %s' % (object.picking_id.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_collie_label_wizard" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_collie_label" />
+    </record>
+
+    <template id="print_collie_label">
+        <t t-call="web.basic_layout">
+            <t t-foreach="range(docs.no_of_copy)" t-as="no">
+                <div class="page">
+                    <div>
+                        <table style="width:100%;">
+                            <tr style="margin:5pt;">
+                                <td style="width:40%;" valign="center">
+                                    <img
+                                        t-if="docs.picking_id.company_id.logo"
+                                        t-att-src="image_data_uri(docs.picking_id.company_id.logo)"
+                                        alt="Company Logo"
+                                    />
+                                </td>
+                                <td style="width:60%" valign="center">
+                                    <div
+                                        t-if="docs.picking_id.sale_id.client_order_ref"
+                                        t-field="docs.picking_id.sale_id.client_order_ref"
+                                        t-options="{'widget': 'barcode', 'width': 600, 'height': 120, 'img_style': 'max-width:100%;', 'img_align': 'center'}"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                        <span>Reference</span>
+                                    </div>
+                                </td>
+                                <td style="width: 60%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                        <span>: &amp;nbsp;</span>
+                                        <t t-esc="docs.picking_id.sale_id.client_order_ref" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                        <span>NEG Delivery slip no.</span>
+                                    </div>
+                                </td>
+                                <td style="width: 60%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                        <span>: &amp;nbsp;</span>
+                                        <t t-esc="docs.picking_id.name" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                        <span>NEG Sales order no.</span>
+                                    </div>
+                                </td>
+                                <td style="width: 60%;">
+                                    <div style="font-size:17px;margin:4pt 0 3pt 0">
+                                    </div>
+                                    <span>: &amp;nbsp;</span>
+                                    <t t-esc="docs.picking_id.origin" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <p style="page-break-before:always;" />
+            </t>
+        </t>
+    </template>
+</odoo>

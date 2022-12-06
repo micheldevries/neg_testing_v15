@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="sale_subscription_view_form_neg">
+        <field name="name">sale.subscription.view.form.inherit.neg</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="customer_reference" />
+                <field name="customer_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_subscription_view_list_tree" model="ir.ui.view">
+        <field name="name">asale.subscription.tree.inh</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_list" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="customer_reference" />
+                <field name="customer_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_subscription_view_search_neg" model="ir.ui.view">
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="customer_reference" />
+                <field name="customer_id" string="For Customer" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

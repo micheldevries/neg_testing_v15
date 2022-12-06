@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_standard_inherit" inherit_id="web.external_layout_standard">
+        <xpath expr="//div/div[1]" position="replace">
+            <div class="row">
+                <div>
+                    <img t-if="company.report_custom_header" t-att-src="image_data_uri(company.report_custom_header)" style="max-width: 1150px;"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div/div[3]" position="replace"/>
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]" position="replace">
+            <div style="border-top: 1px solid black;">
+                <img t-if="company.report_custom_footer" t-att-src="image_data_uri(company.report_custom_footer)"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_partner_form_partner_extend" model="ir.ui.view">
+        <field name="name">res.partner.form.partner.extend</field>
+        <field name="model">res.partner</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+        <data>
+            <div t-if="record.type.raw_value != 'contact'" position="replace">
+                <div>
+                    <field name="street" /><br />
+                    <field name="street2" />
+                    <div>
+                        <field name="zip" />
+                        <field name="city" />
+                    </div>
+                    <field t-if="record.state_id.raw_value" name="state_id" />
+                    <field name="country_id" />
+                </div>
+            </div>
+        </data>
+        </field>
+    </record>
+
+</odoo>

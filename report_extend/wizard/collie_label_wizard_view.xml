@@ -1,0 +1,18 @@
+<odoo>
+    <record model="ir.ui.view" id="collie_label_dialog">
+        <field name="name">Collie Label Dialog</field>
+        <field name="model">collie.label.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="no_of_copy" string="No. of Copies"/>
+                </group>
+                <footer>
+                    <button name="action_print_collie_labels" type="object"
+                            string="Print" class="btn-primary" data-hotkey="q"/>
+                    <button special="cancel" data-hotkey="z" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,196 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_salesorder_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-04 06:32+0000\n"
+"PO-Revision-Date: 2022-11-04 06:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_salesorder_report
+#: model:ir.actions.report,print_report_name:delivery_salesorder_report.action_neg_print_all_related_so
+msgid "'All Related SOs'"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.actions.report,print_report_name:delivery_salesorder_report.action_neg_print_related_so
+msgid "'Related_SalesOrder - %s' % (object.name)"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.actions.report,name:delivery_salesorder_report.action_neg_print_all_related_so
+msgid "All Related SO's"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.model.fields,help:delivery_salesorder_report.field_stock_picking__related_sales_orders_ids
+msgid "All related SO’s for this PO"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.model.fields,field_description:delivery_salesorder_report.field_stock_picking__related_sales_orders_ids
+msgid "All related Sales Orders"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Article number"
+msgstr "Artikelnummer"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Customer of"
+msgstr "Klant van :"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "DATE:"
+msgstr "Afdrukdatum:"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Deb reference"
+msgstr "Referentie :"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Debitor no."
+msgstr "Debiteur nr. :"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Delivery Address:"
+msgstr "Afleveradres:"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Description"
+msgstr "Omschrijving"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Email"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Logo"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "ORDER"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Order date"
+msgstr "Datum :"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Phone"
+msgstr "Telefoon"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.view_picking_form_inherit_delivery_salesorder_extend
+msgid "Print All Related SO's"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.model,name:delivery_salesorder_report.model_purchase_order
+msgid "Purchase Order"
+msgstr "Inkooporder"
+
+#. module: delivery_salesorder_report
+#: model:ir.model.fields,help:delivery_salesorder_report.field_sale_order_line__qty_reserved
+msgid "QTY of reserved items"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Qty deliv"
+msgstr "Geleverd"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Qty ord"
+msgstr "Besteld"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Qty remain"
+msgstr "Nog te ontvangen"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Qty reser"
+msgstr "Voorraad"
+
+#. module: delivery_salesorder_report
+#: model:ir.model.fields,field_description:delivery_salesorder_report.field_sale_order_line__qty_reserved
+msgid "Quantity Reserved"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.view_picking_form_inherit_delivery_salesorder_extend
+msgid "Related SO"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.view_picking_form_inherit_delivery_salesorder_extend
+msgid "Related SO's"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: code:addons/delivery_salesorder_report/models/stock_picking.py:0
+#: model:ir.actions.report,name:delivery_salesorder_report.action_neg_print_related_so
+#, python-format
+msgid "Related Sales Order"
+msgstr ""
+
+#. module: delivery_salesorder_report
+#: model:ir.model,name:delivery_salesorder_report.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Verkooporderregel"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "Sales Person"
+msgstr "Verkoper :"
+
+#. module: delivery_salesorder_report
+#: model:ir.model,name:delivery_salesorder_report.model_stock_picking
+msgid "Transfer"
+msgstr "Verplaatsing"
+
+#. module: delivery_salesorder_report
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_all_related_so
+#: model_terms:ir.ui.view,arch_db:delivery_salesorder_report.print_related_so
+msgid "VAT number"
+msgstr "Btw nr. :"

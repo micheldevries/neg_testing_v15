@@ -1,0 +1,384 @@
+<odoo>
+    <record id="action_neg_print_all_related_so" model="ir.actions.report">
+        <field name="name">All Related SO's</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_salesorder_report.print_all_related_so_extend</field>
+        <field name="report_file">delivery_salesorder_report.print_all_related_so_extend</field>
+        <field name="print_report_name">'All Related SOs'
+        </field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_related_so" />
+    </record>
+
+    <record id="action_neg_print_related_so" model="ir.actions.report">
+        <field name="name">Related Sales Order</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_salesorder_report.print_related_so_extend</field>
+        <field name="report_file">delivery_salesorder_report.print_related_so_extend</field>
+        <field name="print_report_name">'Related SalesOrder - %s' % (object.name)
+        </field>
+        <field name="model_id" ref="sale.model_sale_order" />
+        <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_related_so" />
+    </record>
+
+    <template id="print_all_related_so">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h1 style="font-weight: bold;">
+                                <b>ORDER
+                                    <span t-field="so.name" />
+                                </b>
+                            </h1>
+                            <h1>DATE:
+                                <span
+                                    t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                    t-options="{'widget': 'date'}"
+                                />
+                            </h1>
+                        </div>
+                        <div class="col-4 text-right">
+                            <img
+                                class="img-responsive d-block mx-auto"
+                                t-if="so.company_id.logo"
+                                t-att-src="image_data_uri(so.company_id.logo)"
+                                style="float: right;height: 120px !important; width: auto !important;"
+                                alt="Logo"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    Delivery Address:
+                </div>
+                <table width="100%" style="border: 2px solid grey;">
+                    <tr>
+                        <td width="50%" style="padding:10px;">
+                            <span
+                                t-field="so.partner_id"
+                                t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"
+                            />
+                            <br />
+                            <br />
+                            <table width="100%">
+                                <tr>
+                                    <td style="width:20%">Phone</td>
+                                    <td style="width:10%">:</td>
+                                    <td style="width:70%">
+                                        <h6>
+                                            <span t-field="so.partner_id.phone" />
+                                        </h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>:</td>
+                                    <td>
+                                        <h6>
+                                            <span t-field="so.partner_id.email" />
+                                        </h6>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%" style="padding:10px;">
+                            <table width="100%" class="table-borderless">
+                                <tr>
+                                    <td style="width:30%">Order date</td>
+                                    <td style="width:10%">:</td>
+                                    <td style="width:60%">
+                                        <span
+                                            t-field="so.date_order"
+                                            t-options="{'widget': 'date'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Debitor no.</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="so.partner_id.ext_customer_number" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Deb reference</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="so.client_order_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sales Person</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="so.user_id.name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Customer of</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="so.company_id.name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>VAT number</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="so.partner_id.vat" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h2>
+                                <b>
+                                    <span t-field="so.carrier_id.name">&amp;nbsp;</span>
+                                </b>
+                            </h2>
+                        </td>
+                        <td width="50%">
+                            <h2>
+                                <b>
+                                    <span t-field="so.payment_term_id.name">&amp;nbsp;</span>
+                                </b>
+                            </h2>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <thead style="border-bottom:1px solid grey">
+                        <th width="16%">Article number</th>
+                        <th width="30%">Description</th>
+                        <th width="14%" class="text-center">Qty ord</th>
+                        <th width="12%" class="text-center">Qty reser</th>
+                        <th width="14%" class="text-center">Qty deliv</th>
+                        <th width="14%" class="text-center">Qty remain</th>
+                    </thead>
+                    <t t-foreach="so.order_line" t-as="so_line">
+                        <tbody>
+                            <td width="16%">
+                                <span t-field="so_line.product_id.default_code" />
+                            </td>
+                            <td width="30%">
+                                <span t-field="so_line.product_id.name" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.product_uom_qty)" />
+                            </td>
+                            <td width="12%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.qty_reserved)" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.qty_delivered)" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span
+                                    t-esc="'%.0f'%(so_line.product_uom_qty - so_line.qty_delivered - so_line.qty_reserved)"
+                                />
+                            </td>
+                        </tbody>
+                    </t>
+                </table>
+                <p style="page-break-before:always;" />
+            </div>
+        </t>
+    </template>
+
+    <template id="print_related_so">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h1 style="font-weight: bold;">
+                                <b>ORDER
+                                    <span t-field="doc.name" />
+                                </b>
+                            </h1>
+                            <h1>DATE:
+                                <span
+                                    t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                    t-options="{'widget': 'date'}"
+                                />
+                            </h1>
+                        </div>
+                        <div class="col-4 text-right">
+                            <img
+                                class="img-responsive d-block mx-auto"
+                                t-if="doc.company_id.logo"
+                                t-att-src="image_data_uri(docs.company_id.logo)"
+                                style="float: right;height: 120px !important; width: auto !important;"
+                                alt="Logo"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    Delivery Address:
+                </div>
+                <table width="100%" style="border: 2px solid grey;">
+                    <tr>
+                        <td width="50%" style="padding:10px;">
+                            <span
+                                t-field="doc.partner_id"
+                                t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"
+                            />
+                            <br />
+                            <br />
+                            <table width="100%">
+                                <tr>
+                                    <td style="width:20%">Phone</td>
+                                    <td style="width:10%">:</td>
+                                    <td style="width:70%">
+                                        <h6>
+                                            <span t-field="doc.partner_id.phone" />
+                                        </h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>:</td>
+                                    <td>
+                                        <h6>
+                                            <span t-field="doc.partner_id.email" />
+                                        </h6>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%" style="padding:10px;">
+                            <table width="100%" class="table-borderless">
+                                <tr>
+                                    <td style="width:30%">Order date</td>
+                                    <td style="width:10%">:</td>
+                                    <td style="width:60%">
+                                        <span
+                                            t-field="doc.date_order"
+                                            t-options="{'widget': 'date'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Debitor no.</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="doc.partner_id.ext_customer_number" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Deb reference</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="doc.client_order_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sales Person</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="doc.user_id.name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Customer of</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="doc.company_id.name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>VAT number</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="doc.partner_id.vat" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h2>
+                                <b>
+                                    <span t-field="doc.carrier_id.name">&amp;nbsp;</span>
+                                </b>
+                            </h2>
+                        </td>
+                        <td width="50%">
+                            <h2>
+                                <b>
+                                    <span t-field="doc.payment_term_id.name">&amp;nbsp;</span>
+                                </b>
+                            </h2>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <thead style="border-bottom:1px solid grey">
+                        <th width="16%">Article number</th>
+                        <th width="30%">Description</th>
+                        <th width="14%" class="text-center">Qty ord</th>
+                        <th width="12%" class="text-center">Qty reser</th>
+                        <th width="14%" class="text-center">Qty deliv</th>
+                        <th width="14%" class="text-center">Qty remain</th>
+                    </thead>
+                    <t t-foreach="doc.order_line" t-as="so_line">
+                        <tbody>
+                            <td width="16%">
+                                <span t-field="so_line.product_id.default_code" />
+                            </td>
+                            <td width="30%">
+                                <span t-field="so_line.product_id.name" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.product_uom_qty)" />
+                            </td>
+                            <td width="12%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.qty_reserved)" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span t-esc="'%.0f'%(so_line.qty_delivered)" />
+                            </td>
+                            <td width="14%" class="text-center">
+                                <span
+                                    t-esc="'%.0f'%(so_line.product_uom_qty - so_line.qty_delivered - so_line.qty_reserved)"
+                                />
+                            </td>
+                        </tbody>
+                    </t>
+                </table>
+                <p style="page-break-before:always;" />
+            </div>
+        </t>
+    </template>
+
+    <template id="print_all_related_so_extend">
+        <t t-foreach="docs.related_sales_orders_ids" t-as="so">
+            <t
+                t-call="delivery_salesorder_report.print_all_related_so"
+                t-lang="so.partner_id.lang"
+            />
+        </t>
+    </template>
+
+    <template id="print_related_so_extend">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="delivery_salesorder_report.print_related_so" t-lang="docs.partner_id.lang" />
+        </t>
+    </template>
+
+</odoo>

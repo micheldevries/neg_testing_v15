@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_inherit_inv_owner" model="ir.ui.view">
+        <field name="name">view_picking_form_inherit_inv_owner</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='owner_id']" position="attributes">
+                <attribute name="attrs" />
+            </xpath>
+            <xpath expr="//field[@name='owner_id']" position="after">
+                <field name="consignment_loc" invisible="1" />
+                <field name="validate_btn_visibility" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                 <button
+                    name="neg_validate_picking"
+                    string="Validate"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': ['|',('consignment_loc', '=', False), ('state', '=', 'done')]}"
+                />
+            </xpath>
+            <xpath expr="//button[@name='button_validate']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('validate_btn_visibility', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="context">{'show_address': 1, 'show_vat': True}</attribute>
+                <attribute name="widget">res_partner_many2one</attribute>
+                <attribute name="options">{"always_reload": True}</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="consi_bool_view_location_form_inh" model="ir.ui.view">
+        <field name="name">consi.bool.view.location.form.inh</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='return_location']" position="after">
+                <field name="consignment_loc" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

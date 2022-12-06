@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_warehouse_form_view_inherit_inv_owner" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherit.inv_owner</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="inventory_owner" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_warehouse_view_search_inv_owner" model="ir.ui.view">
+        <field name="name">stock.warehouse.search.inv.owner</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.stock_warehouse_view_search" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="inventory_owner" />
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
+                <filter
+                    string="Inventory Owner"
+                    name="inv_owner"
+                    domain="[('inventory_owner','!=',False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Inventory Owner"
+                        name="inventory_owner"
+                        context="{'group_by':'inventory_owner'}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

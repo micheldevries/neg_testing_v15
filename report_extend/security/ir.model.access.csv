@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_collie_label_wizard,collie_label_wizard,model_collie_label_wizard,,1,1,1,1

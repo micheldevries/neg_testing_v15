@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+             <template
+            id="report_invoice_document_inherit"
+            inherit_id="account.report_invoice_document"
+        >
+                <xpath expr="//h2" position="after">
+                    <h5>
+                        <t t-if="o.ref">Customer Reference: <span t-field="o.ref" /></t>
+                    </h5>
+                </xpath>
+            </template>
+    </data>
+</odoo>

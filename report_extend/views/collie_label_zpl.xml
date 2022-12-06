@@ -1,0 +1,49 @@
+<odoo>
+    <record id="neg_print_collie_label_zpl_action" model="ir.actions.report">
+        <field name="name">Collie Label(ZPL)</field>
+        <field name="model">collie.label.wizard</field>
+        <field name="report_type">qweb-text</field>
+        <field name="report_name">report_extend.collie_label_document_zpl</field>
+        <field name="report_file">report_extend.collie_label_document_zpl</field>
+        <field
+            name="print_report_name"
+        >'Collie Label - %s' % (object.picking_id.name).replace('/', '')
+        </field>
+        <field name="binding_model_id" ref="model_collie_label_wizard" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_collie_label" />
+    </record>
+
+    <template id="collie_label_document_zpl">
+        <t t-foreach="range(docs.no_of_copy)" t-as="no">
+^XA
+
+
+^FO20,10^GFA,2160,2160,18,,::::::::::::::::::::::::::::::::7FEK01FEJ0MFEJ03LF8,7FFK01FEI07MFEI03MF8,7FFK01FEI0NFEI0NF8,7FF8J01FE001NFE001NF8,7FFCJ01FE007NFE007NF8,7FFEJ01FE007NFE00OF8,7IFJ01FE00OFE01OF8,7IF8I01FE00FF8N03FFE,7IFCI01FE00FFO07FF8,7IFCI01FE01FEO07FE,7IFEI01FE01FEO0FFC,7JFI01FE01FEO0FF8,7JF8001FE01FEN01FF,7FDFFC001FE01FEN01FF,7F8FFE001FE01FEN01FE,7F87FF001FE00FFN03FC,7F83FF801FE00FF8M03FC,7F81FF801FE00MFC007FCI01JF,7F81FFC01FE007LFE007FCI01JF8,7F80FFE01FE007LFE007FCI01JF8,7F807FF01FE003LFE007F8I01JF8,7F803FF81FE003LFE007F8I01JF8,7F801FFC1FE007LFE007FCI01JF8,7F800FFE1FE007LFE007FCI01JF8,7F8007FE1FE00MFE007FCI01JF8,7F8007FF1FE00FF8M03FCL07F8,7F8003FF8FE00FFN03FCL07F8,7F8001FFDFE01FEN01FEL07F8,7F8I0JFE01FEN01FFL07F8,7F8I07IFE01FEN01FFL07F8,7F8I03IFE01FEO0FF8K07F8,7F8I01IFE01FEO0FFCK07F8,7F8J0IFE01FFO07FEK07F8,7F8J0IFE00FF8N03FFK07F8,7F8J07FFE00FFCN03FFEJ07F8,7F8J03FFE00OFE01OF8,7F8J01FFE007NFE00OF8,7F8K0FFE007NFE007NF8,7F8K07FE001NFE001NF8,7F8K07FEI0NFEI0NF8,3F8K03FEI07MFEI03MF8,3F8K01FEJ07LFEJ01LF,,:::::::::::Q08T08,20FFI07801E01001020FF0401E008I0E,6018I0840E181001020180606181C103,6018001800C18100302018060C0C1E103,600800180080C10030201006180C1F103,6008I0E010041003020100618061B1038,6008I03C1004100302010061806199007,6008I01C18041003020100618061890038,6008J04080C10030201006180C187I0C,6008001040C18100186010060C1C187I08,60080010C0E181801CE0100606181830218,2L07803E01FC0780100603E018101F,,::::::::::::::::::::^FS
+
+^FX Top section with logo, name and address.
+^CFA,30
+
+^FX This code is for barcode
+^BY2,2,120
+^FO200,10^BC^FD<t t-esc="docs.picking_id.sale_id.client_order_ref" />^FS
+^FX Other Info.
+<t t-if="docs.picking_id.partner_id.lang == 'nl_NL'">
+    ^FO50,220^FDReferentie ^FS
+    ^FO50,270^FDPakbon ^FS
+    ^FO50,320^FDVerkooporder ^FS
+</t>
+<t t-else="">
+    ^FO50,220^FDReference ^FS
+    ^FO50,270^FDDelivery slip ^FS
+    ^FO50,320^FDSales Order ^FS
+</t>
+
+^FO300,220^FD: <t t-esc="docs.picking_id.sale_id.client_order_ref" />^FS
+^FO300,270^FD: <t t-esc="docs.picking_id.name" />^FS
+^FO300,320^FD: <t t-esc="docs.picking_id.origin" />^FS
+
+^XZ
+        </t>
+    </template>
+</odoo>

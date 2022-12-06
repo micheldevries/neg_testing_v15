@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_inherit_delivery_salesorder_extend" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit.delivery.salesorder.extend</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_toggle_is_locked']" position="after">
+                <button
+                    string="Print All Related SO's"
+                    type="object"
+                    name="action_popup_all_related_so"
+                    attrs="{'invisible': ['|',('state', '!=', 'done'), ('picking_type_code', '!=', 'incoming')]}"
+                />
+            </xpath>
+            <xpath expr="//notebook/page[@name='note']" position="after">
+                <page string="Related SO's" name="related_so" attrs="{'invisible': 1}">
+                    <group>
+                        <group>
+                            <field
+                                name="related_sales_orders_ids"
+                                widget="many2many"
+                                nolabel="1"
+                                readonly="1"
+                            >
+                                <tree editable="top">
+                                    <field name="name" readonly="1" string=" " />
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_view_reception_report']" position="before">
+                <button
+                    name="action_view_related_so"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-dollar"
+                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="related_so_count" /></span>
+                        <span class="o_stat_text">Related SO's</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
